@@ -1,8 +1,8 @@
 package ru.job4j.accidents.controller;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 /**
  * IndexController.
@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @AllArgsConstructor
 public class IndexController {
-    @GetMapping("/index")
-    public String getIndex() {
+    @GetMapping("/")
+    public String getIndex(Model model) {
+        model.addAttribute("user", "Petr Arsentev");
         return "index";
     }
 }
