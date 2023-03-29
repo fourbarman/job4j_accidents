@@ -17,6 +17,6 @@ public class AccidentService {
     }
 
     public List<Accident> getAllAccidents() {
-        return this.accidentMem.getAllAccidents().values().stream().toList();
+        return this.accidentMem.getAllAccidents();
     }
 }
