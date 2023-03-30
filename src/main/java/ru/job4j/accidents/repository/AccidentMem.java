@@ -7,18 +7,24 @@ import ru.job4j.accidents.model.Accident;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 @AllArgsConstructor
 public class AccidentMem {
+    private final AtomicInteger ids = new AtomicInteger(3);
     private final Map<Integer, Accident> store = new ConcurrentHashMap<>(
             Map.of(1, new Accident(1, "Accident1", "Accident1Text", "Accident1Address"),
                     2, new Accident(2, "Accident2", "Accident2Text", "Accident2Address"),
                     3, new Accident(3, "Accident3", "Accident3Text", "Accident3Address"))
     );
 
+    private Integer nextId() {
+        return this.ids.incrementAndGet();
+    }
+
     public void putAccident(Accident accident) {
-        accident.setId(this.store.size() + 1);
+        accident.setId(nextId());
         this.store.putIfAbsent(accident.getId(), accident);
     }
 
