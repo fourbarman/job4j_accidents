@@ -18,6 +18,7 @@ public class AccidentMem {
     );
 
     public void putAccident(Accident accident) {
+        accident.setId(this.store.size() + 1);
         this.store.putIfAbsent(accident.getId(), accident);
     }
 

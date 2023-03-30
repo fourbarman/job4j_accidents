@@ -12,7 +12,7 @@ import java.util.List;
 public class AccidentService {
     private final AccidentMem accidentMem;
 
-    public void addAccident(Accident accident) {
+    public void create(Accident accident) {
         this.accidentMem.putAccident(accident);
     }
 
