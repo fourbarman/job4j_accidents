@@ -58,12 +58,17 @@
         </tr>
         </thead>
         <tbody>
-            <tr th:each="accident: ${accidents}">
-                <td th:text="${accident.id}" />
-                <td th:text="${accident.name}" />
-                <td th:text="${accident.text}" />
-                <td th:text="${accident.address}" />
-            </tr>
+        <tr th:each="accident: ${accidents}">
+            <td th:text="${accident.id}"/>
+            <td th:text="${accident.name}"/>
+            <td th:text="${accident.text}"/>
+            <td th:text="${accident.address}"/>
+            <td>
+                <a th:href="@{|/formUpdateAccident?id=${accident.id}|}">
+                    <i class="fa fa-edit"></i>
+                </a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>

@@ -6,6 +6,7 @@ import ru.job4j.accidents.model.Accident;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -26,5 +27,13 @@ public class AccidentMem {
 
     public List<Accident> getAllAccidents() {
         return store.values().stream().toList();
+    }
+
+    public Optional<Accident> findById(int id) {
+        return Optional.ofNullable(this.store.get(id));
+    }
+
+    public void update(Accident accident) {
+        this.store.computeIfPresent(accident.getId(), (k, v) -> accident);
     }
 }
