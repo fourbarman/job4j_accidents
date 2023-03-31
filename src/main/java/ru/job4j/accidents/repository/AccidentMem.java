@@ -19,12 +19,8 @@ public class AccidentMem {
                     3, new Accident(3, "Accident3", "Accident3Text", "Accident3Address"))
     );
 
-    private Integer nextId() {
-        return this.ids.incrementAndGet();
-    }
-
     public void putAccident(Accident accident) {
-        accident.setId(nextId());
+        accident.setId(ids.incrementAndGet());
         this.store.putIfAbsent(accident.getId(), accident);
     }
 
