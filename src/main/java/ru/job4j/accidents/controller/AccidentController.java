@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.AccidentType;
+import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.service.AccidentService;
 import ru.job4j.accidents.service.AccidentTypeService;
+import ru.job4j.accidents.service.RulesService;
 
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * AccidentController.
@@ -26,19 +29,29 @@ import java.util.Optional;
 public class AccidentController {
     private final AccidentService accidents;
     private final AccidentTypeService types;
+    private final RulesService rules;
 
     @GetMapping("/createAccident")
     public String viewCreateAccident(Model model) {
         model.addAttribute("types", this.types.getAllTypes());
+        model.addAttribute("rules", this.rules.getAllRules());
         return "accident/createAccident";
     }
 
     @PostMapping("/saveAccident")
-    public String save(@ModelAttribute Accident accident) {
+    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         Optional<AccidentType> type = this.types.findTypeById(accident.getType().getId());
         if (type.isEmpty()) {
             return "redirect:/";
         }
+        int[] ruleIds = Arrays.stream(req.getParameterValues("rIds"))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+        Set<Rule> accidentRules = new HashSet<>();
+        for (int i : ruleIds) {
+            accidentRules.add(this.rules.findRuleById(i).get());
+        }
+        accident.setRules(accidentRules);
         accident.setType(type.get());
         accidents.create(accident);
         return "redirect:/";

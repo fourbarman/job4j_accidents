@@ -4,26 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.util.Set;
-
 /**
- * Accident.
+ * Rule.
  *
  * @author fourbarman (maks.java@yandex.ru).
  * @version %I%, %G%.
- * @since 28.03.2023.
+ * @since 03.04.2023.
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Accident {
+public class Rule {
     @EqualsAndHashCode.Include
     private int id;
     private String name;
-    private String text;
-    private String address;
-    private AccidentType type;
-    private Set<Rule> rules;
 }

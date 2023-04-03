@@ -52,11 +52,12 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Text</th>
-            <th scope="col">Address</th>
-            <th scope="col">Type</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Текст</th>
+            <th scope="col">Адрес</th>
+            <th scope="col">Тип</th>
+            <th scope="col">Статьи</th>
+            <th scope="col">Редактировать</th>
         </tr>
         </thead>
         <tbody>
@@ -66,6 +67,11 @@
             <td th:text="${accident.text}"/>
             <td th:text="${accident.address}"/>
             <td th:text="${accident?.type?.name}"/>
+            <td>
+                <ul class="list-group list-group-flush" th:each="rule: ${accident?.rules}">
+                    <li class="list-group-item" th:text="${rule.name}"/>
+                </ul>
+            </td>
             <td>
                 <a th:href="@{|/formUpdateAccident?id=${accident.id}|}">
                     <i class="fa fa-edit"></i>
