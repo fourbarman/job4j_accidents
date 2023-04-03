@@ -15,9 +15,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AccidentMem {
     private final AtomicInteger ids = new AtomicInteger(3);
     private final Map<Integer, Accident> store = new ConcurrentHashMap<>(
-            Map.of(1, new Accident(1, "Accident1", "Accident1Text", "Accident1Address"),
-                    2, new Accident(2, "Accident2", "Accident2Text", "Accident2Address"),
-                    3, new Accident(3, "Accident3", "Accident3Text", "Accident3Address"))
+            Map.of(1, new Accident(1, "Accident1", "Accident1Text", "Accident1Address", null),
+                    2, new Accident(2, "Accident2", "Accident2Text", "Accident2Address", null),
+                    3, new Accident(3, "Accident3", "Accident3Text", "Accident3Address", null))
     );
 
     public void putAccident(Accident accident) {

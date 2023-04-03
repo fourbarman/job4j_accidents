@@ -7,7 +7,13 @@ import ru.job4j.accidents.repository.AccidentMem;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * AccidentService.
+ *
+ * @author fourbarman (maks.java@yandex.ru).
+ * @version %I%, %G%.
+ * @since 28.03.2023.
+ */
 @Service
 @AllArgsConstructor
 public class AccidentService {
