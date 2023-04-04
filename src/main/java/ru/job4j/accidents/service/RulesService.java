@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.repository.RulesMem;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 /**
  * RulesService.
  *
@@ -25,5 +25,16 @@ public class RulesService {
 
     public Optional<Rule> findRuleById(int id) {
         return this.rules.findRuleById(id);
+    }
+
+    public Set<Rule> getRulesSet(String[] rules) {
+        int[] ruleIds = Arrays.stream(rules)
+                .mapToInt(Integer::parseInt)
+                .toArray();
+        Set<Rule> accidentRules = new HashSet<>();
+        for (int i : ruleIds) {
+            accidentRules.add(this.rules.findRuleById(i).get());
+        }
+        return accidentRules;
     }
 }

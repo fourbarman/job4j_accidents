@@ -44,14 +44,7 @@ public class AccidentController {
         if (type.isEmpty()) {
             return "redirect:/";
         }
-        int[] ruleIds = Arrays.stream(req.getParameterValues("rIds"))
-                .mapToInt(Integer::parseInt)
-                .toArray();
-        Set<Rule> accidentRules = new HashSet<>();
-        for (int i : ruleIds) {
-            accidentRules.add(this.rules.findRuleById(i).get());
-        }
-        accident.setRules(accidentRules);
+        accident.setRules(this.rules.getRulesSet(req.getParameterValues("rIds")));
         accident.setType(type.get());
         accidents.create(accident);
         return "redirect:/";
@@ -63,17 +56,19 @@ public class AccidentController {
         if (accident.isEmpty()) {
             return "redirect:/";
         }
+        model.addAttribute("rules", this.rules.getAllRules());
         model.addAttribute("types", this.types.getAllTypes());
         model.addAttribute("accident", accident.get());
         return "/accident/updateAccident";
     }
 
     @PostMapping("/updateAccident")
-    public String update(@ModelAttribute Accident accident) {
+    public String update(@ModelAttribute Accident accident, HttpServletRequest req) {
         Optional<AccidentType> type = this.types.findTypeById(accident.getType().getId());
         if (type.isEmpty()) {
             return "redirect:/";
         }
+        accident.setRules(this.rules.getRulesSet(req.getParameterValues("rIds")));
         accident.setType(type.get());
         accidents.updateAccident(accident);
         return "redirect:/";
