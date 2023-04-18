@@ -23,6 +23,24 @@
   <packaging>jar</packaging>
   <name>job4j_accidents</name>
 
+  <profiles>
+    <profile>
+      <id>test</id>
+      <properties>
+        <liquibase.config>db/liquibase_test.properties</liquibase.config>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>production</id>
+      <properties>
+        <liquibase.config>db/liquibase.properties</liquibase.config>
+      </properties>
+    </profile>
+  </profiles>
+
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -69,6 +87,32 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>5.3.23</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.12</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-dbcp2</artifactId>
+      <version>2.7.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.200</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -134,6 +178,25 @@
             </execution>
           </executions>
         </plugin>
+
+        <plugin>
+          <groupId>org.liquibase</groupId>
+          <artifactId>liquibase-maven-plugin</artifactId>
+          <version>4.20.0</version>
+          <configuration>
+            <propertyFile>${liquibase.config}</propertyFile>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>process-resources</phase>
+              <goals>
+                <goal>clearCheckSums</goal>
+                <goal>update</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
       </plugins>
   </build>
 </project>

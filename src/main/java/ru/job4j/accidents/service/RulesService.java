@@ -3,9 +3,11 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
+import ru.job4j.accidents.repository.RulesJdbcTemplate;
 import ru.job4j.accidents.repository.RulesMem;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * RulesService.
@@ -17,16 +19,23 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class RulesService {
-    private final RulesMem rules;
+    private final RulesJdbcTemplate rules;
 
+    /**
+     * Get all Rules.
+     *
+     * @return Rule list.
+     */
     public List<Rule> getAllRules() {
         return this.rules.getAllRules();
     }
 
-    public Optional<Rule> findRuleById(int id) {
-        return this.rules.findRuleById(id);
-    }
-
+    /**
+     * Get Rules Set.
+     *
+     * @param rules String id array.
+     * @return Rules Set.
+     */
     public Set<Rule> getRulesSet(String[] rules) {
         int[] ruleIds = Arrays.stream(rules)
                 .mapToInt(Integer::parseInt)
