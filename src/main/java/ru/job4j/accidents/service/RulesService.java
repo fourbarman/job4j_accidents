@@ -3,11 +3,9 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
-import ru.job4j.accidents.repository.RulesJdbcTemplate;
-import ru.job4j.accidents.repository.RulesMem;
+import ru.job4j.accidents.repository.RulesHibernate;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * RulesService.
@@ -19,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class RulesService {
-    private final RulesJdbcTemplate rules;
+    private final RulesHibernate rules;
 
     /**
      * Get all Rules.
