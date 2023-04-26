@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class AccidentService {
-    private final AccidentHibernate accidentRepository;
+    private final AccidentRepository accidentRepository;
 
     /**
      * Create Accident.
@@ -26,7 +26,7 @@ public class AccidentService {
      * @param accident Accident.
      */
     public void create(Accident accident) {
-        this.accidentRepository.create(accident);
+        this.accidentRepository.save(accident);
     }
 
     /**
@@ -35,7 +35,7 @@ public class AccidentService {
      * @return Accident list.
      */
     public List<Accident> getAllAccidents() {
-        return accidentRepository.getAllAccidents();
+        return (List<Accident>) this.accidentRepository.findAll();
     }
 
     /**
@@ -56,6 +56,6 @@ public class AccidentService {
      * @param accident Accident.
      */
     public void updateAccident(Accident accident) {
-        this.accidentRepository.update(accident);
+        this.accidentRepository.save(accident);
     }
 }

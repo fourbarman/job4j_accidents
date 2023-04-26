@@ -3,7 +3,7 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Rule;
-import ru.job4j.accidents.repository.RulesHibernate;
+import ru.job4j.accidents.repository.RuleRepository;
 
 import java.util.*;
 
@@ -17,7 +17,7 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class RulesService {
-    private final RulesHibernate rules;
+    private final RuleRepository rules;
 
     /**
      * Get all Rules.
@@ -25,7 +25,7 @@ public class RulesService {
      * @return Rule list.
      */
     public List<Rule> getAllRules() {
-        return this.rules.getAllRules();
+        return (List<Rule>) this.rules.findAll();
     }
 
     /**
@@ -40,7 +40,7 @@ public class RulesService {
                 .toArray();
         Set<Rule> accidentRules = new HashSet<>();
         for (int i : ruleIds) {
-            accidentRules.add(this.rules.findRuleById(i).get());
+            accidentRules.add(this.rules.findById(i).get());
         }
         return accidentRules;
     }
