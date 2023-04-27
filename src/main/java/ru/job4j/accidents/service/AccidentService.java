@@ -35,7 +35,7 @@ public class AccidentService {
      * @return Accident list.
      */
     public List<Accident> getAllAccidents() {
-        return (List<Accident>) this.accidentRepository.findAll();
+        return this.accidentRepository.findAll();
     }
 
     /**

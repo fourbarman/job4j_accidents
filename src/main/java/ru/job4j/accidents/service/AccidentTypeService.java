@@ -26,7 +26,7 @@ public class AccidentTypeService {
      * @return AccidentTypes list.
      */
     public List<AccidentType> getAllTypes() {
-        return (List<AccidentType>) this.types.findAll();
+        return this.types.findAll();
     }
 
     /**

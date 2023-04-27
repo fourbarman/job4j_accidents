@@ -25,7 +25,7 @@ public class RulesService {
      * @return Rule list.
      */
     public List<Rule> getAllRules() {
-        return (List<Rule>) this.rules.findAll();
+        return this.rules.findAll();
     }
 
     /**
