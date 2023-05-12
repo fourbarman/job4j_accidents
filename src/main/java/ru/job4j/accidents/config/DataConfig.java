@@ -13,14 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-/**
- * DataConfig.
- * SpringDataConfig config.
- *
- * @author fourbarman (maks.java@yandex.ru).
- * @version %I%, %G%.
- * @since 21.04.2023.
- */
 @Configuration
 @EnableJpaRepositories("ru.job4j.accidents.repository")
 @EnableTransactionManagement
