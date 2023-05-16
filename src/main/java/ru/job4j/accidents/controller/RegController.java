@@ -38,7 +38,7 @@ public class RegController {
     public String register(@ModelAttribute @Validated User user,
                            BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "/registration";
         }
         user.setEnabled(true);
