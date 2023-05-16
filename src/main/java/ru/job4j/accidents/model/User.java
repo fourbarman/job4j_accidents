@@ -3,6 +3,8 @@ package ru.job4j.accidents.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
 /**
  * User.
  *
@@ -20,7 +22,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @NotBlank
     String username;
+    @NotBlank
     String password;
     boolean enabled;
     @ManyToOne

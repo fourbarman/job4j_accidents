@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -30,13 +30,16 @@
             <input type="hidden" name="id" value="0"/>
             <div class="form-group">
                 <label for="username">Логин</label>
-                <input type="text" class="form-control" name="username" id="username" th:text="*{username}">
+                <input type="text" class="form-control" name="username" id="username" th:field="*{username}">
             </div>
+            <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</div>
             <div class="form-group">
                 <label for="password">Пароль</label>
-                <input type="text" class="form-control" name="password" id="password" th:text="*{password}">
+                <input type="password" class="form-control" name="password" id="password" th:field="*{password}">
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Зарегистрироваться</button>
+            <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            <a th:href="@{/login}" class="btn btn-primary">Войти</a>
         </form>
     </main>
 </div>
