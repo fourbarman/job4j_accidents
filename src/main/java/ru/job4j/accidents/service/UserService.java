@@ -9,6 +9,7 @@ import ru.job4j.accidents.model.User;
 import ru.job4j.accidents.repository.UserRepository;
 
 import java.util.Optional;
+
 /**
  * UserService.
  *
@@ -29,5 +30,9 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found.");
         }
         return (UserDetails) user.get();
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
     }
 }
