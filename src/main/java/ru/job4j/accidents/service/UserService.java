@@ -1,6 +1,8 @@
 package ru.job4j.accidents.service;
 
 import lombok.AllArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.User;
 import ru.job4j.accidents.repository.UserRepository;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 /**
@@ -32,7 +35,13 @@ public class UserService implements UserDetailsService {
         return (UserDetails) user.get();
     }
 
-    public User save(User user) {
-        return userRepository.save(user);
+    public Optional<User> save(User user) {
+        User savedUser;
+        try {
+            savedUser = userRepository.save(user);
+        } catch (DataAccessException e) {
+            return Optional.empty();
+        }
+        return Optional.of(savedUser);
     }
 }
