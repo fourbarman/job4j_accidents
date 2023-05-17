@@ -1,7 +1,7 @@
 package ru.job4j.accidents.service;
 
 import lombok.AllArgsConstructor;
-import org.hibernate.exception.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.User;
 import ru.job4j.accidents.repository.UserRepository;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
 /**
@@ -20,6 +19,7 @@ import java.util.Optional;
  * @version %I%, %G%.
  * @since 15.05.2023.
  */
+@Slf4j
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
@@ -40,7 +40,7 @@ public class UserService implements UserDetailsService {
         try {
             savedUser = userRepository.save(user);
         } catch (DataAccessException e) {
-            System.out.println(e.getCause().toString());
+            log.error(e.toString());
         }
         return Optional.ofNullable(savedUser);
     }
