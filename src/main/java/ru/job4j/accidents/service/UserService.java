@@ -36,12 +36,12 @@ public class UserService implements UserDetailsService {
     }
 
     public Optional<User> save(User user) {
-        User savedUser;
+        User savedUser = null;
         try {
             savedUser = userRepository.save(user);
         } catch (DataAccessException e) {
-            return Optional.empty();
+            System.out.println(e.getCause().toString());
         }
-        return Optional.of(savedUser);
+        return Optional.ofNullable(savedUser);
     }
 }
