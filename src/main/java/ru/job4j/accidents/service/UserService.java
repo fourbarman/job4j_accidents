@@ -40,7 +40,7 @@ public class UserService implements UserDetailsService {
         try {
             savedUser = userRepository.save(user);
         } catch (DataAccessException e) {
-            log.error(e.toString());
+            log.error(e.getMessage(), e);
         }
         return Optional.ofNullable(savedUser);
     }
