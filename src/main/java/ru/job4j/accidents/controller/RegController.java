@@ -42,10 +42,9 @@ public class RegController {
 
     @PostMapping("/registration")
     public String register(@ModelAttribute User user) {
-                user.setEnabled(true);
+        user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setAuthority(authorityService.findByAuthority("ROLE_USER"));
-
         Optional<User> savedUser = userService.save(user);
         if (savedUser.isEmpty()) {
             return "redirect:/registration?constrError=true";
